@@ -246,14 +246,14 @@ footer p{margin:6px 0}
   <h1 class="neon-sign">⛽ AI GAS STATION</h1>
   <p class="subtitle">Why pay <strong>premium</strong> when <strong>budget</strong> gets you there?<br>Compare token prices. Swap providers. Save thousands.</p>
   <nav class="nav-links">
-    <a href="#calculator">💰 Calculator</a>
-    <a href="#picker">🧭 Picker</a>
-    <a href="#pumps">⛽ Pumps</a>
-    <a href="#compare">📊 Table</a>
-    <a href="#scenarios">📋 Scenarios</a>
-    <a href="#subscriptions">📦 Plans</a>
-    <a href="#byok">🔌 BYOK</a>
-    <a href="#fuelswap">🔄 Fuel Swap</a>
+    <a href="#calculator">Calculator</a>
+    <a href="#picker">Picker</a>
+    <a href="#pumps">Pumps</a>
+    <a href="#compare">Table</a>
+    <a href="#scenarios">Scenarios</a>
+    <a href="#subscriptions">Plans</a>
+    <a href="#byok">BYOK</a>
+    <a href="#fuelswap">Fuel Swap</a>
   </nav>
 </header>
 
@@ -265,13 +265,13 @@ footer p{margin:6px 0}
 
 <!-- ==================== CALCULATOR ==================== -->
 <section id="calculator">
-  <h2>💰 Savings Calculator</h2>
+  <h2>Savings Calculator</h2>
   <p style="text-align:center;color:#888;margin-bottom:20px">Pick your usage profile or enter custom tokens/month</p>
   <div class="calc-presets" id="calcPresets">
-    <button class="calc-preset" data-tokens="500000">🧑‍💻 Light Coder<br><small>500K tok/mo</small></button>
-    <button class="calc-preset active" data-tokens="5000000">🤖 Agent User<br><small>5M tok/mo</small></button>
-    <button class="calc-preset" data-tokens="20000000">👥 Small Team<br><small>20M tok/mo</small></button>
-    <button class="calc-preset" data-tokens="100000000">🏢 Enterprise<br><small>100M tok/mo</small></button>
+    <button class="calc-preset" data-tokens="500000">Light Coder<br><small>500K tok/mo</small></button>
+    <button class="calc-preset active" data-tokens="5000000">Agent User<br><small>5M tok/mo</small></button>
+    <button class="calc-preset" data-tokens="20000000">Small Team<br><small>20M tok/mo</small></button>
+    <button class="calc-preset" data-tokens="100000000">Enterprise<br><small>100M tok/mo</small></button>
   </div>
   <div class="calc-custom">
     <label>Custom:</label>
@@ -284,21 +284,21 @@ footer p{margin:6px 0}
 
 <!-- ==================== FUEL PICKER ==================== -->
 <section id="picker">
-  <h2>🧭 Which Fuel Grade Do You Need?</h2>
+  <h2>Which Fuel Grade Do You Need?</h2>
   <p style="text-align:center;color:#888;margin-bottom:20px">Click what you're building — get a recommendation</p>
   <div class="picker-options" id="pickerOptions">
-    <button class="picker-btn" data-grade="regular" style="--c:#00cc44"><span class="icon">📝</span>Boilerplate / CRUD</button>
-    <button class="picker-btn" data-grade="plus" style="--c:#ffaa00"><span class="icon">🐛</span>Bug Fixes / Debug</button>
-    <button class="picker-btn" data-grade="premium" style="--c:#ff3377"><span class="icon">🏗️</span>Full Features</button>
-    <button class="picker-btn" data-grade="ultra" style="--c:#aa44ff"><span class="icon">🧠</span>Complex Architecture</button>
-    <button class="picker-btn" data-grade="agent" style="--c:#ffcc00"><span class="icon">🤖</span>Agent Workflows</button>
+    <button class="picker-btn" data-grade="regular" style="--c:#00cc44">Boilerplate / CRUD</button>
+    <button class="picker-btn" data-grade="plus" style="--c:#ffaa00">Bug Fixes / Debug</button>
+    <button class="picker-btn" data-grade="premium" style="--c:#ff3377">Full Features</button>
+    <button class="picker-btn" data-grade="ultra" style="--c:#aa44ff">Complex Architecture</button>
+    <button class="picker-btn" data-grade="agent" style="--c:#ffcc00">Agent Workflows</button>
   </div>
   <div class="picker-result" id="pickerResult"></div>
 </section>
 
 <!-- ==================== PUMP STATIONS ==================== -->
 <section id="pumps">
-  <h2>⛽ Pick Your Pump</h2>
+  <h2>Pick Your Pump</h2>
   <div class="pumps-grid">
 
     <!-- DeepSeek v4-flash -->
@@ -427,50 +427,50 @@ footer p{margin:6px 0}
 
 <!-- ==================== COMPARISON TABLE ==================== -->
 <section id="compare">
-  <h2>📊 Full Price Comparison</h2>
+  <h2>Full Price Comparison</h2>
   <div class="table-wrap"><table>
     <thead><tr><th>Provider</th><th>Model</th><th>Grade</th><th>Input $/1M</th><th>Output $/1M</th><th>Cached $/1M</th><th>Context</th></tr></thead>
     <tbody>
-      <tr><td>🐋 DeepSeek</td><td>v4-flash</td><td><span class="grade-dot" style="background:#00cc44"></span>Regular</td><td class="price-cell p-low">$0.14</td><td class="price-cell p-low">$0.28</td><td class="price-cell p-low">$0.0028</td><td>1M</td></tr>
-      <tr><td>🐋 DeepSeek</td><td>v4-pro</td><td><span class="grade-dot" style="background:#ffaa00"></span>Plus</td><td class="price-cell p-low">$0.44</td><td class="price-cell p-low">$0.87</td><td class="price-cell p-low">$0.0036</td><td>1M</td></tr>
-      <tr><td>🔺 Google</td><td>Gemini 3 Flash</td><td><span class="grade-dot" style="background:#00cc44"></span>Regular</td><td class="price-cell p-mid">$0.75</td><td class="price-cell p-mid">$4.50</td><td class="price-cell p-mid">$0.075</td><td>1M</td></tr>
-      <tr><td>⚡ OpenAI</td><td>GPT-5.4 mini</td><td><span class="grade-dot" style="background:#00cc44"></span>Regular</td><td class="price-cell p-mid">$0.75</td><td class="price-cell p-mid">$4.50</td><td class="price-cell p-mid">$0.075</td><td>270K</td></tr>
-      <tr><td>🧡 Anthropic</td><td>Claude Haiku 4.5</td><td><span class="grade-dot" style="background:#ffaa00"></span>Plus</td><td class="price-cell p-mid">$1.00</td><td class="price-cell p-mid">$5.00</td><td class="price-cell p-mid">$0.10</td><td>200K</td></tr>
-      <tr><td>🔺 Google</td><td>Gemini 3 Pro</td><td><span class="grade-dot" style="background:#ffaa00"></span>Plus</td><td class="price-cell p-mid">$1.50</td><td class="price-cell p-mid">$9.00</td><td class="price-cell p-mid">$0.15</td><td>1M</td></tr>
-      <tr><td>⚡ OpenAI</td><td>GPT-5.4</td><td><span class="grade-dot" style="background:#ff3377"></span>Premium</td><td class="price-cell p-high">$2.50</td><td class="price-cell p-high">$15.00</td><td class="price-cell p-high">$0.25</td><td>270K</td></tr>
-      <tr><td>🧡 Anthropic</td><td>Claude Sonnet 4.6</td><td><span class="grade-dot" style="background:#ff3377"></span>Premium</td><td class="price-cell p-high">$3.00</td><td class="price-cell p-high">$15.00</td><td class="price-cell p-high">$0.30</td><td>200K</td></tr>
-      <tr><td>🧡 Anthropic</td><td>Claude Opus 4.7</td><td><span class="grade-dot" style="background:#aa44ff"></span>Ultra</td><td class="price-cell p-ultra">$5.00</td><td class="price-cell p-ultra">$25.00</td><td class="price-cell p-ultra">$0.50</td><td>200K</td></tr>
-      <tr><td>⚡ OpenAI</td><td>GPT-5.5</td><td><span class="grade-dot" style="background:#aa44ff"></span>Ultra</td><td class="price-cell p-ultra">$5.00</td><td class="price-cell p-ultra">$30.00</td><td class="price-cell p-ultra">$0.50</td><td>270K</td></tr>
+      <tr><td>DeepSeek</td><td>v4-flash</td><td><span class="grade-dot" style="background:#00cc44"></span>Regular</td><td class="price-cell p-low">$0.14</td><td class="price-cell p-low">$0.28</td><td class="price-cell p-low">$0.0028</td><td>1M</td></tr>
+      <tr><td>DeepSeek</td><td>v4-pro</td><td><span class="grade-dot" style="background:#ffaa00"></span>Plus</td><td class="price-cell p-low">$0.44</td><td class="price-cell p-low">$0.87</td><td class="price-cell p-low">$0.0036</td><td>1M</td></tr>
+      <tr><td>Google</td><td>Gemini 3 Flash</td><td><span class="grade-dot" style="background:#00cc44"></span>Regular</td><td class="price-cell p-mid">$0.75</td><td class="price-cell p-mid">$4.50</td><td class="price-cell p-mid">$0.075</td><td>1M</td></tr>
+      <tr><td>OpenAI</td><td>GPT-5.4 mini</td><td><span class="grade-dot" style="background:#00cc44"></span>Regular</td><td class="price-cell p-mid">$0.75</td><td class="price-cell p-mid">$4.50</td><td class="price-cell p-mid">$0.075</td><td>270K</td></tr>
+      <tr><td>Anthropic</td><td>Claude Haiku 4.5</td><td><span class="grade-dot" style="background:#ffaa00"></span>Plus</td><td class="price-cell p-mid">$1.00</td><td class="price-cell p-mid">$5.00</td><td class="price-cell p-mid">$0.10</td><td>200K</td></tr>
+      <tr><td>Google</td><td>Gemini 3 Pro</td><td><span class="grade-dot" style="background:#ffaa00"></span>Plus</td><td class="price-cell p-mid">$1.50</td><td class="price-cell p-mid">$9.00</td><td class="price-cell p-mid">$0.15</td><td>1M</td></tr>
+      <tr><td>OpenAI</td><td>GPT-5.4</td><td><span class="grade-dot" style="background:#ff3377"></span>Premium</td><td class="price-cell p-high">$2.50</td><td class="price-cell p-high">$15.00</td><td class="price-cell p-high">$0.25</td><td>270K</td></tr>
+      <tr><td>Anthropic</td><td>Claude Sonnet 4.6</td><td><span class="grade-dot" style="background:#ff3377"></span>Premium</td><td class="price-cell p-high">$3.00</td><td class="price-cell p-high">$15.00</td><td class="price-cell p-high">$0.30</td><td>200K</td></tr>
+      <tr><td>Anthropic</td><td>Claude Opus 4.7</td><td><span class="grade-dot" style="background:#aa44ff"></span>Ultra</td><td class="price-cell p-ultra">$5.00</td><td class="price-cell p-ultra">$25.00</td><td class="price-cell p-ultra">$0.50</td><td>200K</td></tr>
+      <tr><td>OpenAI</td><td>GPT-5.5</td><td><span class="grade-dot" style="background:#aa44ff"></span>Ultra</td><td class="price-cell p-ultra">$5.00</td><td class="price-cell p-ultra">$30.00</td><td class="price-cell p-ultra">$0.50</td><td>270K</td></tr>
     </tbody>
   </table></div>
   <div class="savings-highlight" style="margin-top:20px">
-    <strong style="color:#ffcc00">💡 DeepSeek v4-flash ($0.28/M output) is <span style="color:#ff3377">107× cheaper</span> than GPT-5.5 ($30/M output).</strong><br>
+    <strong style="color:#ffcc00">DeepSeek v4-flash ($0.28/M output) is <span style="color:#ff3377">107× cheaper</span> than GPT-5.5 ($30/M output).</strong><br>
     100K output tokens: DeepSeek ≈ <strong>$0.03</strong> &nbsp;|&nbsp; GPT-5.5 ≈ <strong>$3.00</strong>
   </div>
 </section>
 
 <!-- ==================== COST SCENARIOS ==================== -->
 <section id="scenarios">
-  <h2>📋 Real-World Cost Scenarios</h2>
+  <h2>Real-World Cost Scenarios</h2>
   <p style="text-align:center;color:#888;margin-bottom:24px">What you actually pay when coding with an AI agent. Output tokens dominate — that's what drives cost.</p>
   <div class="scenarios">
     <div class="scenario-card">
-      <div class="task">🪝 Writing a React component</div>
+      <div class="task">Writing a React component</div>
       <div class="desc">A standard form component with validation. ~8K output tokens.</div>
       <div class="compare"><span class="cheap">DeepSeek v4-flash<br>$0.002</span><span class="vs">vs</span><span class="expensive">GPT-5.5<br>$0.24</span></div>
     </div>
     <div class="scenario-card">
-      <div class="task">🔄 Refactoring a module</div>
+      <div class="task">Refactoring a module</div>
       <div class="desc">Breaking up a 500-line file. ~50K output tokens.</div>
       <div class="compare"><span class="cheap">DeepSeek v4-pro<br>$0.04</span><span class="vs">vs</span><span class="expensive">Claude Sonnet<br>$0.75</span></div>
     </div>
     <div class="scenario-card">
-      <div class="task">🤖 30-min agent coding session</div>
+      <div class="task">30-min agent coding session</div>
       <div class="desc">Agent writes, debugs, iterates. ~200K output tokens.</div>
       <div class="compare"><span class="cheap">DeepSeek v4-flash<br>$0.06</span><span class="vs">vs</span><span class="expensive">Claude Sonnet<br>$3.00</span></div>
     </div>
     <div class="scenario-card">
-      <div class="task">🏗️ Building a full feature</div>
+      <div class="task">Building a full feature</div>
       <div class="desc">10 iterations with tests and fixes. ~500K output tokens.</div>
       <div class="compare"><span class="cheap">DeepSeek v4-pro<br>$0.44</span><span class="vs">vs</span><span class="expensive">GPT-5.5<br>$15.00</span></div>
     </div>
@@ -479,60 +479,60 @@ footer p{margin:6px 0}
 
 <!-- ==================== SUBSCRIPTIONS ==================== -->
 <section id="subscriptions">
-  <h2>📦 Flat-Rate & Free Options</h2>
+  <h2>Flat-Rate & Free Options</h2>
   <p style="text-align:center;color:#888;margin-bottom:24px">Don't want per-token pricing? These tools bundle AI into monthly plans — or are completely free.</p>
   <div class="table-wrap"><table>
     <thead><tr><th>Service</th><th>Plan</th><th>Monthly</th><th>What You Get</th></tr></thead>
     <tbody>
-      <tr><td>🐙 GitHub Copilot</td><td>Individual</td><td class="price-cell p-low">$10</td><td>Unlimited completions, chat, Claude + GPT models</td></tr>
-      <tr><td>🐙 GitHub Copilot</td><td>Business</td><td class="price-cell p-low">$19</td><td>+ Org policies, IP indemnity</td></tr>
-      <tr><td>🖱️ Cursor</td><td>Pro</td><td class="price-cell p-low">$20</td><td>2K completions/mo, unlimited chat, multi-model</td></tr>
-      <tr><td>🌊 Windsurf</td><td>Pro</td><td class="price-cell p-low">$15</td><td>Unlimited autocomplete, Cascade agent</td></tr>
-      <tr><td>🔺 Gemini Code Assist</td><td>Individual</td><td class="price-cell p-low">FREE</td><td>Code completion, chat, 180K completions/month</td></tr>
-      <tr><td>🔺 Gemini Code Assist</td><td>Standard</td><td class="price-cell p-mid">$19.80</td><td>+ Productivity metrics, custom rules</td></tr>
-      <tr><td>🦙 Ollama</td><td>Self-hosted</td><td class="price-cell p-low">FREE</td><td>Run local models (Llama, Mistral, DeepSeek, etc). You pay electricity only.</td></tr>
-      <tr><td>🔮 OpenCode CLI</td><td>Open Source</td><td class="price-cell p-low">FREE</td><td>Terminal AI agent. Bring any API key, use any provider. No markup.</td></tr>
+      <tr><td>GitHub Copilot</td><td>Individual</td><td class="price-cell p-low">$10</td><td>Unlimited completions, chat, Claude + GPT models</td></tr>
+      <tr><td>GitHub Copilot</td><td>Business</td><td class="price-cell p-low">$19</td><td>+ Org policies, IP indemnity</td></tr>
+      <tr><td>Cursor</td><td>Pro</td><td class="price-cell p-low">$20</td><td>2K completions/mo, unlimited chat, multi-model</td></tr>
+      <tr><td>Windsurf</td><td>Pro</td><td class="price-cell p-low">$15</td><td>Unlimited autocomplete, Cascade agent</td></tr>
+      <tr><td>Gemini Code Assist</td><td>Individual</td><td class="price-cell p-low">FREE</td><td>Code completion, chat, 180K completions/month</td></tr>
+      <tr><td>Gemini Code Assist</td><td>Standard</td><td class="price-cell p-mid">$19.80</td><td>+ Productivity metrics, custom rules</td></tr>
+      <tr><td>Ollama</td><td>Self-hosted</td><td class="price-cell p-low">FREE</td><td>Run local models (Llama, Mistral, DeepSeek, etc). You pay electricity only.</td></tr>
+      <tr><td>OpenCode CLI</td><td>Open Source</td><td class="price-cell p-low">FREE</td><td>Terminal AI agent. Bring any API key, use any provider. No markup.</td></tr>
     </tbody>
   </table></div>
 </section>
 
 <!-- ==================== BYOK TOOLS ==================== -->
 <section id="byok">
-  <h2>🔌 Bring Your Own Key (BYOK) Tools</h2>
+  <h2>Bring Your Own Key (BYOK) Tools</h2>
   <p style="text-align:center;color:#888;margin-bottom:24px">These tools don't lock you into one provider. Plug in any API key and pump whatever fuel you want.</p>
   <div class="tool-grid">
     <div class="tool-card" style="--bc:#8B5CF6;--bg:rgba(139,92,246,0.1)">
-      <div class="tool-name">🔮 OpenCode CLI</div>
+      <div class="tool-name">OpenCode CLI</div>
       <div class="tool-type">Terminal Agent · Open Source</div>
       <div class="tool-desc">Full-featured terminal AI coding agent. Point it at any OpenAI-compatible endpoint.</div>
       <div class="tool-providers">Works with: DeepSeek, OpenAI, Anthropic, Google, OpenRouter, Ollama, any</div>
     </div>
     <div class="tool-card" style="--bc:#6366F1;--bg:rgba(99,102,241,0.1)">
-      <div class="tool-name">🔌 Continue.dev</div>
+      <div class="tool-name">Continue.dev</div>
       <div class="tool-type">IDE Extension · Open Source</div>
       <div class="tool-desc">AI code assistant for VS Code & JetBrains. Choose any model as your backend.</div>
       <div class="tool-providers">Works with: DeepSeek, OpenAI, Anthropic, Google, Ollama, LM Studio, any</div>
     </div>
     <div class="tool-card" style="--bc:#10B981;--bg:rgba(16,185,129,0.1)">
-      <div class="tool-name">🤖 Aider</div>
+      <div class="tool-name">Aider</div>
       <div class="tool-type">Terminal Pair Programmer · Open Source</div>
       <div class="tool-desc">AI pair programming in your terminal. Git-aware. Any LLM you point it at.</div>
       <div class="tool-providers">Works with: DeepSeek, OpenAI, Anthropic, Google, OpenRouter, any</div>
     </div>
     <div class="tool-card" style="--bc:#F59E0B;--bg:rgba(245,158,11,0.1)">
-      <div class="tool-name">🦊 Cline</div>
+      <div class="tool-name">Cline</div>
       <div class="tool-type">VS Code Extension · Open Source</div>
       <div class="tool-desc">Autonomous coding agent in your editor. Bring your own API keys.</div>
       <div class="tool-providers">Works with: DeepSeek, OpenAI, Anthropic, Google, OpenRouter, any</div>
     </div>
     <div class="tool-card" style="--bc:#EC4899;--bg:rgba(236,72,153,0.1)">
-      <div class="tool-name">🌐 OpenRouter</div>
+      <div class="tool-name">OpenRouter</div>
       <div class="tool-type">Unified API · Freemium</div>
       <div class="tool-desc">Single API to 200+ models. No lock-in. Compare and route dynamically.</div>
       <div class="tool-providers">Routes to: DeepSeek, OpenAI, Anthropic, Google, Meta, Mistral, xAI, all</div>
     </div>
     <div class="tool-card" style="--bc:#aaa;--bg:rgba(170,170,170,0.08)">
-      <div class="tool-name">🦙 Ollama</div>
+      <div class="tool-name">Ollama</div>
       <div class="tool-type">Local Inference · Open Source</div>
       <div class="tool-desc">Run models on your own machine. Zero token cost. Privacy + speed.</div>
       <div class="tool-providers">Runs locally: Llama, Mistral, DeepSeek, Qwen, Gemma, Phi, any GGUF</div>
@@ -542,10 +542,10 @@ footer p{margin:6px 0}
 
 <!-- ==================== FUEL SWAP ==================== -->
 <section id="fuelswap">
-  <h2>🔄 Bring Your Own Fuel</h2>
+  <h2>Bring Your Own Fuel</h2>
   <p style="text-align:center;color:#888;margin-bottom:24px">You don't need to switch CLIs to save money. Keep the tools you love — just change what's under the hood.</p>
   <div class="fuel-swap-box">
-    <h3>🖥️ Keep the CLI. Change the Fuel.</h3>
+    <h3>Keep the CLI. Change the Fuel.</h3>
     <p style="color:#aaa;margin:10px 0">Most coding CLIs let you configure the API endpoint. You can keep using Claude Code or Codex CLI — just point them at a cheaper provider.</p>
     <div class="swap-flow">
       <div class="step">Claude Code<br><small style="color:#F97316">Anthropic $15/M</small></div>
@@ -567,12 +567,12 @@ footer p{margin:6px 0}
 
 <!-- ==================== WHY SHOP AROUND ==================== -->
 <section id="learn">
-  <h2>🧠 Why Shop Around?</h2>
-  <div class="edu-card"><h3><span class="emoji">🏪</span>AI Providers Are Gas Stations</h3><p>You wouldn't fill up at the most expensive station without checking. AI tokens are the same — same "fuel" (intelligence) at wildly different prices. The cheapest is often <strong>90% as good</strong> for most coding tasks.</p></div>
-  <div class="edu-card"><h3><span class="emoji">🔧</span>Match the Model to the Task</h3><p>Writing boilerplate or CRUD? Use <strong>DeepSeek v4-flash</strong> ($0.28/M). Complex architecture decisions? Maybe <strong>Sonnet</strong> ($15/M) is worth it. Most agent tokens are spent on iteration — cheap models handle that fine.</p></div>
-  <div class="edu-card"><h3><span class="emoji">💸</span>Escape the "Default" Trap</h3><p>People stick with Claude Code or Codex because it's what they know. But the CLI is just the <strong>pump handle</strong> — you can change the fuel behind it. See the BYOK tools above.</p></div>
-  <div class="edu-card"><h3><span class="emoji">📊</span>Benchmarks ≠ Reality</h3><p>A model scoring 2% lower on some eval might save you <strong>95% on tokens</strong>. In practice, the difference between a $0.87/M model and a $30/M model is usually just a few extra iterations — not a different outcome.</p></div>
-  <div class="edu-card"><h3><span class="emoji">🔄</span>Multi-Provider Strategy</h3><p>Smart devs use multiple providers: cheap models for boilerplate/iteration, premium for architecture/tricky bugs. BYOK tools make it easy to route to different models per task.</p></div>
+  <h2>Why Shop Around?</h2>
+  <div class="edu-card"><h3>AI Providers Are Gas Stations</h3><p>You wouldn't fill up at the most expensive station without checking. AI tokens are the same — same "fuel" (intelligence) at wildly different prices. The cheapest is often <strong>90% as good</strong> for most coding tasks.</p></div>
+  <div class="edu-card"><h3>Match the Model to the Task</h3><p>Writing boilerplate or CRUD? Use <strong>DeepSeek v4-flash</strong> ($0.28/M). Complex architecture decisions? Maybe <strong>Sonnet</strong> ($15/M) is worth it. Most agent tokens are spent on iteration — cheap models handle that fine.</p></div>
+  <div class="edu-card"><h3>Escape the "Default" Trap</h3><p>People stick with Claude Code or Codex because it's what they know. But the CLI is just the <strong>pump handle</strong> — you can change the fuel behind it. See the BYOK tools above.</p></div>
+  <div class="edu-card"><h3>Benchmarks ≠ Reality</h3><p>A model scoring 2% lower on some eval might save you <strong>95% on tokens</strong>. In practice, the difference between a $0.87/M model and a $30/M model is usually just a few extra iterations — not a different outcome.</p></div>
+  <div class="edu-card"><h3>Multi-Provider Strategy</h3><p>Smart devs use multiple providers: cheap models for boilerplate/iteration, premium for architecture/tricky bugs. BYOK tools make it easy to route to different models per task.</p></div>
 </section>
 
 <footer>
@@ -627,8 +627,8 @@ function updateCalc(){
       <div class="prov">${p.grade} · ${p.name.split(' ').pop()}</div>
       <div class="cost">$${cost.toFixed(2)}</div>
       <div class="per">/ month</div>
-      ${!isCheapest&&savings>0?`<div class="savings">💸 Save $${(savings*12).toFixed(0)}/yr vs cheapest</div>`:''}
-      ${isCheapest?`<div class="savings">🏆 Cheapest option</div>`:''}
+      ${!isCheapest&&savings>0?`<div class="savings">Save $${(savings*12).toFixed(0)}/yr vs cheapest</div>`:''}
+      ${isCheapest?`<div class="savings">Cheapest option</div>`:''}
     </div>`;
   });
   results.innerHTML=html;
@@ -638,7 +638,7 @@ function updateCalc(){
   const mostExpCost=Math.round((mostExp.in+mostExp.out)*tok*100)/100;
   const annualSave=Math.round((mostExpCost-cheapestCost)*12);
   document.getElementById('savingsHighlight').innerHTML=
-    `<strong>🔄 Switching from <span style="color:#ff3377">${mostExp.name}</span> to <span style="color:#00cc44">${cheapest.name}</span></strong><br>
+    `<strong>Switching from <span style="color:#ff3377">${mostExp.name}</span> to <span style="color:#00cc44">${cheapest.name}</span></strong><br>
     saves <strong style="color:#ffcc00">$${annualSave.toLocaleString()}/year</strong> at ${(currentTokens/1e6).toFixed(1)}M tokens/month`;
 }
 
@@ -664,7 +664,7 @@ const recommendations={
   plus:{grade:'⛽ Plus 89',color:'#ffaa00',model:'DeepSeek v4-pro',price:'$0.87/M output',why:'Bug fixes and debugging need a bit more reasoning. Plus-grade models give you that without the premium price tag.',cheapest:'Also try: Claude Haiku 4.5 ($5/M) or Gemini 3 Pro ($9/M)'},
   premium:{grade:'⛽ Premium 93',color:'#ff3377',model:'Claude Sonnet 4.6',price:'$15/M output',why:'Full features require solid architecture thinking. Premium models excel here. But try Plus first — you might not need the upgrade.',cheapest:'Also try: GPT-5.4 ($15/M). Or test DeepSeek v4-pro first — you might be surprised.'},
   ultra:{grade:'⛽ Ultra 98',color:'#aa44ff',model:'Claude Opus 4.7',price:'$25/M output',why:'Complex architecture benefits from the strongest reasoning. But ask yourself: can Sonnet handle 90% of this? It costs 40% less.',cheapest:'Alternative: GPT-5.5 ($30/M). Only use Ultra when the task truly demands it.'},
-  agent:{grade:'⚡ Agent Strategy',color:'#ffcc00',model:'Multi-model routing',price:'Hybrid',why:'Agent workflows burn tokens on boilerplate AND need deep reasoning. Best strategy: route simple tasks to DeepSeek v4-flash, complex ones to Sonnet. Save 80%+ vs using premium for everything.',cheapest:'Use a BYOK tool like OpenCode or Continue.dev that supports per-task model routing.'}
+  agent:{grade:'Agent Strategy',color:'#ffcc00',model:'Multi-model routing',price:'Hybrid',why:'Agent workflows burn tokens on boilerplate AND need deep reasoning. Best strategy: route simple tasks to DeepSeek v4-flash, complex ones to Sonnet. Save 80%+ vs using premium for everything.',cheapest:'Use a BYOK tool like OpenCode or Continue.dev that supports per-task model routing.'}
 };
 
 document.querySelectorAll('.picker-btn').forEach(btn=>{
