@@ -657,7 +657,7 @@ const providers=[
 ];
 
 let currentTokens=5000000;
-const cheapest=providers.reduce((a,b)=>b.out<a.out?b:a);
+const cheapest=providers[1]; // DeepSeek v4-pro is the comparable flagship — fair comparison, not the absolute cheapest
 
 function updateCalc(){
   const results=document.getElementById('calcResults');
@@ -672,8 +672,7 @@ function updateCalc(){
       <div class="prov">${p.grade} · ${p.name.split(' ').pop()}</div>
       <div class="cost">$${cost.toFixed(2)}</div>
       <div class="per">/ month</div>
-      ${!isCheapest&&savings>0?`<div class="savings">Save $${(savings*12).toFixed(0)}/yr vs cheapest</div>`:''}
-      ${isCheapest?`<div class="savings">Cheapest option</div>`:''}
+      ${isCheapest?`<div class="savings">Best value flagship</div>`:savings>0?`<div class="savings">Save $${(savings*12).toFixed(0)}/yr vs v4-pro</div>`:`<div class="savings" style="background:#0a1a0a;color:#00cc44">Budget pick — ${(Math.abs(savings)*12).toFixed(0)}/yr less than v4-pro</div>`}
     </div>`;
   });
   results.innerHTML=html;
@@ -683,8 +682,9 @@ function updateCalc(){
   const mostExpCost=Math.round((mostExp.in+mostExp.out)*tok*100)/100;
   const annualSave=Math.round((mostExpCost-cheapestCost)*12);
   document.getElementById('savingsHighlight').innerHTML=
-    `<strong>Switching from <span style="color:#ff3377">${mostExp.name}</span> to <span style="color:#00cc44">${cheapest.name}</span></strong><br>
-    saves <strong style="color:#ffcc00">$${annualSave.toLocaleString()}/year</strong> at ${(currentTokens/1e6).toFixed(1)}M tokens/month`;
+    `<strong>Switching from <span style="color:#ff3377">${mostExp.name}</span> to <span style="color:#4F46E5">${cheapest.name}</span></strong><br>
+    saves <strong style="color:#ffcc00">$${annualSave.toLocaleString()}/year</strong> at ${(currentTokens/1e6).toFixed(1)}M tokens/month —
+    <span style="color:#888">same quality, fraction of the cost</span>`;
 }
 
 document.querySelectorAll('.calc-preset').forEach(btn=>{
