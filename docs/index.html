@@ -3,621 +3,685 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>⛽ AI Gas Station — Shop Around, Don't Overpay for Tokens</title>
-<meta name="description" content="AI providers are like gas stations — compare token prices before you fill up. Real pricing for DeepSeek, Claude, OpenAI, Gemini, and more.">
-<meta property="og:title" content="AI Gas Station — Compare AI Token Prices">
-<meta property="og:description" content="Why pay premium when budget gets you there? Real-time AI provider pricing comparison.">
+<title>⛽ AI Gas Station — Stop Overpaying for Tokens. Shop Around.</title>
+<meta name="description" content="AI providers are gas stations — compare token prices, use the savings calculator, and learn which tools let you bring your own fuel.">
+<meta property="og:title" content="AI Gas Station — Compare AI Token Prices & Save">
+<meta property="og:description" content="DeepSeek is 107x cheaper than GPT-5.5. Why pay premium when budget gets you there?">
 <meta property="og:type" content="website">
 <style>
-/* ============ RESET & BASE ============ */
+/* ===== RESET & BASE ===== */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;font-size:16px}
 body{
   font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
-  background:#08080f;
-  color:#e0e0e0;
-  overflow-x:hidden;
-  line-height:1.6;
+  background:#08080f;color:#d0d0d8;overflow-x:hidden;line-height:1.6;
+  --deepseek:#4F46E5;--anthropic:#F97316;--openai:#10A37F;
+  --google:#4285F4;--ollama:#f0f0f0;--opencode:#8B5CF6;
 }
-a{color:#00f0ff;text-decoration:none}
+a{color:#00d4ff;text-decoration:none;transition:color .2s}
+a:hover{color:#fff}
+section{padding:0 20px 60px;position:relative;z-index:1;max-width:1100px;margin:0 auto}
+h2{text-align:center;font-size:1.9rem;margin-bottom:36px;color:#fff;font-weight:800}
+h3{font-size:1.15rem;margin-bottom:10px}
 
-/* ============ STARS ============ */
+/* ===== STARS ===== */
 .stars{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0}
 .star{position:absolute;background:#fff;border-radius:50%;animation:twinkle var(--dur) ease-in-out infinite;animation-delay:var(--delay);opacity:0}
-@keyframes twinkle{0%,100%{opacity:0.2}50%{opacity:0.9}}
+@keyframes twinkle{0%,100%{opacity:0.15}50%{opacity:0.85}}
 
-/* ============ HERO ============ */
-.hero{
-  position:relative;z-index:1;
-  text-align:center;padding:60px 20px 40px;
-}
+/* ===== HERO ===== */
+.hero{text-align:center;padding:50px 20px 30px}
 .neon-sign{
-  display:inline-block;
-  font-size:clamp(2rem,6vw,4.5rem);
-  font-weight:900;
-  letter-spacing:-1px;
+  display:inline-block;font-size:clamp(2rem,6vw,4.5rem);font-weight:900;letter-spacing:-1px;
   background:linear-gradient(180deg,#ff2d55 0%,#ff6b35 50%,#ffcc00 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
   filter:drop-shadow(0 0 20px rgba(255,45,85,0.5)) drop-shadow(0 0 40px rgba(255,107,53,0.3));
   animation:flicker 3s infinite alternate;
 }
-@keyframes flicker{
-  0%,19%,21%,23%,25%,54%,56%,100%{opacity:1}
-  20%,24%,55%{opacity:0.7}
-}
-.hero .subtitle{
-  font-size:clamp(1rem,2.5vw,1.4rem);
-  color:#aab;
-  margin-top:10px;
-  font-weight:300;
-}
+@keyframes flicker{0%,19%,21%,23%,25%,54%,56%,100%{opacity:1}20%,24%,55%{opacity:0.75}}
+.hero .subtitle{font-size:clamp(1rem,2.5vw,1.3rem);color:#99a;margin-top:8px;font-weight:300}
 .hero .subtitle strong{color:#ffcc00}
+.nav-links{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:20px}
+.nav-links a{
+  background:#16162a;color:#99a;padding:7px 16px;border-radius:20px;
+  font-size:0.82rem;font-weight:600;border:1px solid #2a2a40;
+  transition:all .2s;
+}
+.nav-links a:hover{background:#24244a;color:#fff;border-color:#444}
 
-/* ============ ROAD SCENE ============ */
-.road-scene{
-  position:relative;z-index:1;
-  height:220px;
-  margin:20px 0 40px;
-  overflow:hidden;
-  background:linear-gradient(180deg,transparent 0%,#111 40%,#1a1a2e 100%);
-}
-.road{
-  position:absolute;bottom:0;left:0;width:100%;height:60px;
-  background:#1a1a1a;
-}
+/* ===== ROAD SCENE ===== */
+.road-scene{position:relative;z-index:1;height:200px;margin:10px 0 30px;overflow:hidden;
+  background:linear-gradient(180deg,transparent 0%,#111 40%,#1a1a2e 100%)}
+.road{position:absolute;bottom:0;left:0;width:100%;height:50px;background:#1a1a1a}
 .road::before{
   content:'';position:absolute;top:50%;left:0;width:100%;height:4px;
-  background:repeating-linear-gradient(90deg,#ffcc00 0px,#ffcc00 30px,transparent 30px,transparent 60px);
-  animation:roadMove 1s linear infinite;
+  background:repeating-linear-gradient(90deg,#ffcc00 0,#ffcc00 25px,transparent 25px,transparent 50px);
+  animation:roadMove 0.8s linear infinite;
 }
-@keyframes roadMove{to{transform:translateX(-60px)}}
-.car{
-  position:absolute;bottom:25px;z-index:2;
-  animation:drive 8s ease-in-out infinite;
-  font-size:40px;
-  filter:drop-shadow(0 0 10px rgba(255,255,255,0.3));
-}
-@keyframes drive{
-  0%{left:-80px;transform:translateY(0)}
-  20%{left:25%;transform:translateY(-3px)}
-  40%{left:50%;transform:translateY(0)}
-  60%{left:75%;transform:translateY(-3px)}
-  80%{left:105%;transform:translateY(0)}
-  100%{left:105%}
-}
-.road-label{
-  position:absolute;bottom:70px;
-  font-size:10px;color:#555;white-space:nowrap;
-  animation:drive 8s ease-in-out infinite;
-  text-align:center;
+@keyframes roadMove{to{transform:translateX(-50px)}}
+.car{position:absolute;bottom:20px;z-index:2;animation:drive 10s ease-in-out infinite;font-size:36px;
+  filter:drop-shadow(0 0 10px rgba(255,255,255,0.3))}
+@keyframes drive{0%{left:-80px}20%{left:25%}40%{left:50%}60%{left:75%}80%{left:105%}100%{left:105%}}
+
+/* ===== SECTION BOX ===== */
+.section-box{
+  background:#111122;border:1px solid #2a2a3e;border-radius:14px;padding:28px;margin-bottom:20px;
 }
 
-/* ============ PUMP STATIONS GRID ============ */
-.pumps-section{
-  position:relative;z-index:1;
-  padding:0 20px 60px;
-  max-width:1200px;margin:0 auto;
+/* ===== CALCULATOR ===== */
+.calc-presets{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px;justify-content:center}
+.calc-preset{
+  padding:10px 18px;border-radius:24px;border:1px solid #333;background:#16162a;color:#99a;
+  cursor:pointer;font-size:0.85rem;font-weight:600;transition:all .2s;user-select:none;
 }
-.pumps-section h2{
-  text-align:center;font-size:2rem;
-  margin-bottom:40px;
-  color:#fff;
+.calc-preset:hover,.calc-preset.active{border-color:#ffcc00;color:#ffcc00;background:#1a1a35}
+.calc-custom{display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:20px}
+.calc-custom input{
+  width:140px;padding:10px 14px;border-radius:8px;border:1px solid #333;background:#0a0a1a;
+  color:#ffcc00;font-size:1.1rem;font-family:'Courier New',monospace;text-align:center;
 }
-.pumps-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:24px;
+.calc-custom label{color:#888;font-size:0.85rem}
+.results-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.calc-result{
+  background:#0a0a1a;border:1px solid #2a2a3e;border-radius:10px;padding:16px;text-align:center;
+  transition:all .3s;
 }
+.calc-result:hover{transform:translateY(-2px);border-color:var(--c,#444)}
+.calc-result .prov{font-size:0.8rem;color:#888;text-transform:uppercase;letter-spacing:1px}
+.calc-result .cost{font-size:1.6rem;font-weight:800;color:var(--c,#fff);font-family:'Courier New',monospace;margin:6px 0}
+.calc-result .per{font-size:0.75rem;color:#666}
+.calc-result .savings{
+  display:inline-block;margin-top:6px;padding:3px 10px;border-radius:12px;
+  background:#0a2a0a;color:#00cc44;font-size:0.78rem;font-weight:700;
+}
+.savings-highlight{text-align:center;margin-top:20px;padding:14px;background:#0a0f0a;border-radius:10px;
+  border:1px solid #1a3a1a;font-size:1.1rem}
+.savings-highlight strong{color:#ffcc00}
 
-/* ============ PUMP CARD ============ */
+/* ===== FUEL PICKER ===== */
+.picker-options{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:24px}
+.picker-btn{
+  padding:14px 20px;border-radius:12px;border:1px solid #333;background:#16162a;
+  color:#aaa;cursor:pointer;text-align:center;min-width:140px;transition:all .2s;
+  font-size:0.9rem;font-weight:600;
+}
+.picker-btn:hover,.picker-btn.active{border-color:var(--c);color:#fff;background:#1a1a35;transform:translateY(-2px)}
+.picker-btn .icon{font-size:1.8rem;display:block;margin-bottom:6px}
+.picker-result{display:none;text-align:center;padding:24px;background:#0a0a1a;border-radius:12px;border:1px solid #2a2a3e}
+.picker-result.show{display:block}
+.picker-result .grade-name{font-size:1.4rem;font-weight:800;color:var(--c);margin-bottom:6px}
+.picker-result .suggestion{font-size:1rem;color:#ccc}
+.picker-result .cheapest{font-size:0.9rem;color:#888;margin-top:8px}
+.picker-result .cheapest strong{color:#00cc44}
+
+/* ===== PUMP CARDS ===== */
+.pumps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
 .pump-card{
-  background:linear-gradient(180deg,#1a1a2e 0%,#12121f 100%);
-  border-radius:16px;
-  padding:24px;
-  position:relative;
-  border:1px solid #2a2a3e;
-  transition:transform 0.3s,border-color 0.3s,box-shadow 0.3s;
-  overflow:hidden;
+  background:linear-gradient(180deg,#16162e 0%,#10101f 100%);
+  border-radius:14px;padding:22px;position:relative;overflow:hidden;
+  border:1px solid #2a2a3e;transition:transform .3s,border-color .3s,box-shadow .3s;
 }
-.pump-card:hover{
-  transform:translateY(-4px);
-  border-color:var(--accent,#444);
-  box-shadow:0 8px 32px rgba(0,0,0,0.4),0 0 20px var(--accent-glow,rgba(255,255,255,0.05));
-}
-.pump-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:3px;
-  background:var(--accent,#444);
-}
-.pump-card .brand{
-  display:flex;align-items:center;gap:10px;margin-bottom:16px;
-}
+.pump-card:hover{transform:translateY(-4px);border-color:var(--bc,#444);
+  box-shadow:0 8px 32px rgba(0,0,0,0.5),0 0 24px var(--bg,rgba(255,255,255,0.03))}
+.pump-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--bc,#444)}
+.pump-card .brand{display:flex;align-items:center;gap:10px;margin-bottom:14px}
 .pump-card .brand-logo{
-  width:40px;height:40px;border-radius:10px;
-  background:var(--accent,#333);
-  display:flex;align-items:center;justify-content:center;
-  font-size:22px;
+  width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;
+  font-size:22px;background:var(--bc,#333);color:#000;
 }
-.pump-card .brand-name{
-  font-size:1.2rem;font-weight:700;color:#fff;
-}
-.pump-card .brand-grade{
-  font-size:0.75rem;color:var(--accent,#888);
-  text-transform:uppercase;letter-spacing:2px;
-  font-weight:600;
-}
+.pump-card .brand-name{font-size:1.1rem;font-weight:700;color:#fff}
+.pump-card .brand-grade{font-size:0.7rem;color:var(--bc,#888);text-transform:uppercase;letter-spacing:2px;font-weight:600}
 .pump-card .price-display{
-  background:#000;
-  border:2px solid #333;
-  border-radius:8px;
-  padding:14px 16px;
-  margin-bottom:12px;
+  background:#000;border:2px solid #222;border-radius:8px;padding:12px 14px;margin-bottom:10px;
   font-family:'Courier New',monospace;
-  position:relative;
 }
-.pump-card .price-row{
-  display:flex;justify-content:space-between;
-  padding:4px 0;
-  font-size:0.9rem;
-}
-.pump-card .price-label{color:#888}
-.pump-card .price-value{
-  color:var(--accent,#0f0);
-  font-weight:700;
-  font-size:1.1rem;
-  text-shadow:0 0 8px var(--accent-glow,rgba(0,255,0,0.3));
-}
+.pump-card .price-row{display:flex;justify-content:space-between;padding:3px 0;font-size:0.85rem}
+.pump-card .price-label{color:#777}
+.pump-card .price-value{color:var(--bc,#0f0);font-weight:700;font-size:1.05rem;text-shadow:0 0 8px var(--bg,rgba(0,255,0,0.2))}
 .pump-card .fuel-badge{
-  display:inline-block;
-  padding:3px 10px;border-radius:20px;
-  font-size:0.7rem;font-weight:700;
-  text-transform:uppercase;letter-spacing:1px;
-  background:var(--accent,#333);color:#000;
-  margin-bottom:12px;
+  display:inline-block;padding:3px 10px;border-radius:20px;font-size:0.68rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:1px;background:var(--bc,#333);color:#000;margin-bottom:10px;
 }
-.pump-card .features{
-  font-size:0.8rem;color:#777;
-  display:flex;flex-wrap:wrap;gap:6px;
-  margin-top:8px;
-}
-.pump-card .features span{
-  background:#1e1e30;padding:3px 8px;border-radius:4px;
-}
+.pump-card .features{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.pump-card .features span{background:#1e1e35;padding:2px 8px;border-radius:4px;font-size:0.73rem;color:#888}
 
-/* ============ FUEL GRADE COLORS ============ */
-.grade-regular{--accent:#00cc44;--accent-glow:rgba(0,204,68,0.2)}
-.grade-plus{--accent:#ffaa00;--accent-glow:rgba(255,170,0,0.2)}
-.grade-premium{--accent:#ff3377;--accent-glow:rgba(255,51,119,0.2)}
-.grade-ultra{--accent:#aa44ff;--accent-glow:rgba(170,68,255,0.2)}
+/* Brand colors */
+.ds{--bc:#4F46E5;--bg:rgba(79,70,229,0.15)}
+.an{--bc:#F97316;--bg:rgba(249,115,22,0.15)}
+.oa{--bc:#10A37F;--bg:rgba(16,163,127,0.15)}
+.go{--bc:#4285F4;--bg:rgba(66,133,244,0.15)}
+.ol{--bc:#aaa;--bg:rgba(170,170,170,0.1)}
+.oc{--bc:#8B5CF6;--bg:rgba(139,92,246,0.15)}
 
-/* ============ COMPARISON TABLE ============ */
-.compare-section{
-  position:relative;z-index:1;
-  padding:0 20px 60px;max-width:1000px;margin:0 auto;
-}
-.compare-section h2{
-  text-align:center;font-size:2rem;margin-bottom:30px;color:#fff;
-}
-.table-wrap{
-  overflow-x:auto;
-  border-radius:12px;
-  border:1px solid #2a2a3e;
-  background:#111122;
-}
-table{
-  width:100%;border-collapse:collapse;
-  font-size:0.85rem;
-}
-thead th{
-  background:#1a1a2e;padding:14px 16px;
-  text-align:left;font-weight:700;color:#fff;
-  position:sticky;top:0;
-  border-bottom:2px solid #2a2a3e;
-}
-tbody td{padding:12px 16px;border-bottom:1px solid #1a1a2e}
+.grade-regular .fuel-badge{background:#00cc44}
+.grade-plus .fuel-badge{background:#ffaa00}
+.grade-premium .fuel-badge{background:#ff3377}
+.grade-ultra .fuel-badge{background:#aa44ff}
+
+/* ===== TABLE ===== */
+.table-wrap{overflow-x:auto;border-radius:12px;border:1px solid #2a2a3e;background:#111122}
+table{width:100%;border-collapse:collapse;font-size:0.82rem}
+thead th{background:#1a1a2e;padding:12px 14px;text-align:left;font-weight:700;color:#fff;border-bottom:2px solid #2a2a3e;font-size:0.8rem;text-transform:uppercase;letter-spacing:1px}
+tbody td{padding:10px 14px;border-bottom:1px solid #1a1a2e}
 tbody tr:hover{background:#1a1a30}
 .price-cell{font-family:'Courier New',monospace;font-weight:700}
-.price-low{color:#00cc44}
-.price-mid{color:#ffaa00}
-.price-high{color:#ff3377}
-.price-ultra{color:#aa44ff}
-.grade-dot{
-  display:inline-block;width:10px;height:10px;border-radius:50%;
-  margin-right:6px;
-}
+.p-low{color:#00cc44}.p-mid{color:#ffaa00}.p-high{color:#ff3377}.p-ultra{color:#aa44ff}
+.grade-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px}
 
-/* ============ EDUCATION SECTION ============ */
-.edu-section{
-  position:relative;z-index:1;
-  padding:0 20px 60px;max-width:800px;margin:0 auto;
+/* ===== SCENARIO CARDS ===== */
+.scenarios{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.scenario-card{
+  background:#111122;border:1px solid #2a2a3e;border-radius:12px;padding:20px;transition:all .3s;
 }
-.edu-section h2{text-align:center;font-size:1.8rem;margin-bottom:30px;color:#fff}
+.scenario-card:hover{transform:translateY(-2px);border-color:#444}
+.scenario-card .task{font-size:0.8rem;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.scenario-card .desc{font-size:0.95rem;color:#ccc;margin-bottom:12px}
+.scenario-card .compare{display:flex;justify-content:space-between;font-size:0.85rem}
+.scenario-card .compare .cheap{color:#00cc44;font-weight:700}
+.scenario-card .compare .expensive{color:#ff3377;font-weight:700}
+.scenario-card .compare .vs{color:#555}
+
+/* ===== BYOK & FUEL SWAP ===== */
+.tool-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.tool-card{
+  background:#111122;border:1px solid #2a2a3e;border-radius:12px;padding:18px;
+  transition:all .3s;border-left:3px solid var(--bc,#333);
+}
+.tool-card:hover{transform:translateY(-2px);border-color:var(--bc,#555);box-shadow:0 4px 20px var(--bg,rgba(0,0,0,0.3))}
+.tool-card .tool-name{font-weight:700;color:#fff;font-size:1rem;margin-bottom:4px}
+.tool-card .tool-type{font-size:0.72rem;color:var(--bc,#888);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.tool-card .tool-desc{font-size:0.82rem;color:#99a;margin-bottom:8px}
+.tool-card .tool-providers{font-size:0.75rem;color:#666}
+
+.fuel-swap-box{
+  background:linear-gradient(135deg,#1a1a30 0%,#0a0a1a 100%);border:1px solid #333;
+  border-radius:14px;padding:28px;text-align:center;
+}
+.fuel-swap-box h3{color:#ffcc00}
+.fuel-swap-box .swap-flow{
+  display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;
+  margin:20px 0;font-size:0.95rem;
+}
+.swap-flow .step{
+  background:#16162e;padding:8px 16px;border-radius:8px;border:1px solid #2a2a3e;
+}
+.swap-flow .arrow{color:#ffcc00;font-size:1.3rem}
+
+/* ===== EDU CARDS ===== */
 .edu-card{
-  background:#111122;border:1px solid #2a2a3e;
-  border-radius:12px;padding:24px;margin-bottom:16px;
+  background:#111122;border:1px solid #2a2a3e;border-radius:12px;padding:22px;margin-bottom:14px;
 }
-.edu-card h3{color:#ffcc00;margin-bottom:8px;font-size:1.1rem}
-.edu-card p{color:#aab;font-size:0.95rem}
-.edu-card .emoji{font-size:1.5rem;margin-right:8px}
+.edu-card h3{color:#ffcc00}
+.edu-card p{color:#aab;font-size:0.9rem}
+.edu-card .emoji{font-size:1.4rem;margin-right:6px}
 
-/* ============ FOOTER ============ */
+/* ===== FOOTER ===== */
 footer{
-  position:relative;z-index:1;
-  text-align:center;padding:40px 20px;
-  border-top:1px solid #1a1a2e;
-  color:#555;font-size:0.85rem;
-  max-width:800px;margin:0 auto;
+  text-align:center;padding:40px 20px;border-top:1px solid #1a1a2e;
+  color:#555;font-size:0.82rem;max-width:800px;margin:0 auto;position:relative;z-index:1;
 }
-footer a{color:#888}
-footer a:hover{color:#fff}
+footer a{color:#888}footer a:hover{color:#fff}
+footer p{margin:6px 0}
 
-/* ============ MOBILE ============ */
-@media(max-width:600px){
-  .hero{padding:30px 16px 20px}
+/* ===== MOBILE ===== */
+@media(max-width:640px){
+  .hero{padding:30px 14px 20px}
   .pumps-grid{grid-template-columns:1fr}
-  .road-scene{height:150px}
-  .car{font-size:30px;bottom:20px}
-  .road{height:40px}
-  .road-label{bottom:48px;font-size:8px}
-  table{font-size:0.75rem}
-  thead th,tbody td{padding:8px 10px}
+  .road-scene{height:140px}.car{font-size:28px;bottom:16px}.road{height:36px}
+  table{font-size:0.7rem}thead th,tbody td{padding:8px}
+  .nav-links{gap:6px}.nav-links a{font-size:0.72rem;padding:5px 10px}
+  .results-grid{grid-template-columns:1fr 1fr}
+  .scenarios{grid-template-columns:1fr}
+  .tool-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
 
-<!-- Starfield -->
+<!-- STARS -->
 <div class="stars" id="stars"></div>
 
 <!-- HERO -->
 <header class="hero">
   <h1 class="neon-sign">⛽ AI GAS STATION</h1>
-  <p class="subtitle">Why pay <strong>premium</strong> when <strong>budget</strong> gets you there?<br>Compare token prices before you fill up your context window.</p>
+  <p class="subtitle">Why pay <strong>premium</strong> when <strong>budget</strong> gets you there?<br>Compare token prices. Swap providers. Save thousands.</p>
+  <nav class="nav-links">
+    <a href="#calculator">💰 Calculator</a>
+    <a href="#picker">🧭 Picker</a>
+    <a href="#pumps">⛽ Pumps</a>
+    <a href="#compare">📊 Table</a>
+    <a href="#scenarios">📋 Scenarios</a>
+    <a href="#subscriptions">📦 Plans</a>
+    <a href="#byok">🔌 BYOK</a>
+    <a href="#fuelswap">🔄 Fuel Swap</a>
+  </nav>
 </header>
 
-<!-- ROAD SCENE -->
+<!-- ROAD -->
 <div class="road-scene">
   <div class="car" id="car">🚗💨</div>
   <div class="road"></div>
 </div>
 
-<!-- PUMP STATIONS -->
-<section class="pumps-section" id="pumps">
-  <h2>🛒 Pick Your Pump</h2>
+<!-- ==================== CALCULATOR ==================== -->
+<section id="calculator">
+  <h2>💰 Savings Calculator</h2>
+  <p style="text-align:center;color:#888;margin-bottom:20px">Pick your usage profile or enter custom tokens/month</p>
+  <div class="calc-presets" id="calcPresets">
+    <button class="calc-preset" data-tokens="500000">🧑‍💻 Light Coder<br><small>500K tok/mo</small></button>
+    <button class="calc-preset active" data-tokens="5000000">🤖 Agent User<br><small>5M tok/mo</small></button>
+    <button class="calc-preset" data-tokens="20000000">👥 Small Team<br><small>20M tok/mo</small></button>
+    <button class="calc-preset" data-tokens="100000000">🏢 Enterprise<br><small>100M tok/mo</small></button>
+  </div>
+  <div class="calc-custom">
+    <label>Custom:</label>
+    <input type="number" id="customTokens" value="5000000" placeholder="Tokens/month">
+    <label>tokens/month</label>
+  </div>
+  <div class="results-grid" id="calcResults"></div>
+  <div class="savings-highlight" id="savingsHighlight"></div>
+</section>
+
+<!-- ==================== FUEL PICKER ==================== -->
+<section id="picker">
+  <h2>🧭 Which Fuel Grade Do You Need?</h2>
+  <p style="text-align:center;color:#888;margin-bottom:20px">Click what you're building — get a recommendation</p>
+  <div class="picker-options" id="pickerOptions">
+    <button class="picker-btn" data-grade="regular" style="--c:#00cc44"><span class="icon">📝</span>Boilerplate / CRUD</button>
+    <button class="picker-btn" data-grade="plus" style="--c:#ffaa00"><span class="icon">🐛</span>Bug Fixes / Debug</button>
+    <button class="picker-btn" data-grade="premium" style="--c:#ff3377"><span class="icon">🏗️</span>Full Features</button>
+    <button class="picker-btn" data-grade="ultra" style="--c:#aa44ff"><span class="icon">🧠</span>Complex Architecture</button>
+    <button class="picker-btn" data-grade="agent" style="--c:#ffcc00"><span class="icon">🤖</span>Agent Workflows</button>
+  </div>
+  <div class="picker-result" id="pickerResult"></div>
+</section>
+
+<!-- ==================== PUMP STATIONS ==================== -->
+<section id="pumps">
+  <h2>⛽ Pick Your Pump</h2>
   <div class="pumps-grid">
 
-    <!-- DeepSeek v4-flash - Regular -->
-    <div class="pump-card grade-regular">
+    <!-- DeepSeek v4-flash -->
+    <div class="pump-card ds grade-regular">
       <div class="fuel-badge">⛽ Regular 87</div>
-      <div class="brand">
-        <div class="brand-logo">🐋</div>
-        <div>
-          <div class="brand-name">DeepSeek</div>
-          <div class="brand-grade">v4-flash</div>
-        </div>
-      </div>
+      <div class="brand"><div class="brand-logo">🐋</div><div><div class="brand-name">DeepSeek</div><div class="brand-grade">v4-flash</div></div></div>
       <div class="price-display">
         <div class="price-row"><span class="price-label">Input</span><span class="price-value">$0.14/M</span></div>
         <div class="price-row"><span class="price-label">Output</span><span class="price-value">$0.28/M</span></div>
         <div class="price-row"><span class="price-label">Cached</span><span class="price-value">$0.0028/M</span></div>
       </div>
-      <div class="features">
-        <span>1M context</span><span>384K output</span><span>Tool calls</span><span>Thinking mode</span>
-      </div>
+      <div class="features"><span>1M context</span><span>384K output</span><span>Tool calls</span><span>Thinking mode</span></div>
     </div>
 
-    <!-- Gemini 3 Flash - Regular -->
-    <div class="pump-card grade-regular">
+    <!-- Gemini 3 Flash -->
+    <div class="pump-card go grade-regular">
       <div class="fuel-badge">⛽ Regular 87</div>
-      <div class="brand">
-        <div class="brand-logo">🔺</div>
-        <div>
-          <div class="brand-name">Google Gemini</div>
-          <div class="brand-grade">3 Flash</div>
-        </div>
-      </div>
+      <div class="brand"><div class="brand-logo">🔺</div><div><div class="brand-name">Google Gemini</div><div class="brand-grade">3 Flash</div></div></div>
       <div class="price-display">
         <div class="price-row"><span class="price-label">Input</span><span class="price-value">$0.75/M</span></div>
         <div class="price-row"><span class="price-label">Output</span><span class="price-value">$4.50/M</span></div>
         <div class="price-row"><span class="price-label">Cached</span><span class="price-value">$0.075/M</span></div>
       </div>
-      <div class="features">
-        <span>1M context</span><span>Multimodal</span><span>Free tier avail</span><span>Search grounding</span>
-      </div>
+      <div class="features"><span>1M context</span><span>Multimodal</span><span>Free tier</span><span>Search grounding</span></div>
     </div>
 
-    <!-- GPT-5.4 mini - Regular -->
-    <div class="pump-card grade-regular">
+    <!-- GPT-5.4 mini -->
+    <div class="pump-card oa grade-regular">
       <div class="fuel-badge">⛽ Regular 87</div>
-      <div class="brand">
-        <div class="brand-logo">⚡</div>
-        <div>
-          <div class="brand-name">OpenAI</div>
-          <div class="brand-grade">GPT-5.4 mini</div>
-        </div>
-      </div>
+      <div class="brand"><div class="brand-logo">⚡</div><div><div class="brand-name">OpenAI</div><div class="brand-grade">GPT-5.4 mini</div></div></div>
       <div class="price-display">
         <div class="price-row"><span class="price-label">Input</span><span class="price-value">$0.75/M</span></div>
         <div class="price-row"><span class="price-label">Output</span><span class="price-value">$4.50/M</span></div>
         <div class="price-row"><span class="price-label">Cached</span><span class="price-value">$0.075/M</span></div>
       </div>
-      <div class="features">
-        <span>270K context</span><span>Computer use</span><span>Structured output</span><span>Batch -50%</span>
-      </div>
+      <div class="features"><span>270K context</span><span>Computer use</span><span>Batch -50%</span><span>Structured output</span></div>
     </div>
 
-    <!-- DeepSeek v4-pro - Plus -->
-    <div class="pump-card grade-plus">
+    <!-- DeepSeek v4-pro -->
+    <div class="pump-card ds grade-plus">
       <div class="fuel-badge">⛽ Plus 89</div>
-      <div class="brand">
-        <div class="brand-logo">🐋</div>
-        <div>
-          <div class="brand-name">DeepSeek</div>
-          <div class="brand-grade">v4-pro</div>
-        </div>
-      </div>
+      <div class="brand"><div class="brand-logo">🐋</div><div><div class="brand-name">DeepSeek</div><div class="brand-grade">v4-pro</div></div></div>
       <div class="price-display">
         <div class="price-row"><span class="price-label">Input</span><span class="price-value">$0.44/M</span></div>
         <div class="price-row"><span class="price-label">Output</span><span class="price-value">$0.87/M</span></div>
         <div class="price-row"><span class="price-label">Cached</span><span class="price-value">$0.0036/M</span></div>
       </div>
-      <div class="features">
-        <span>1M context</span><span>384K output</span><span>Tool calls</span><span>⚡ Lowest market price</span>
-      </div>
+      <div class="features"><span>1M context</span><span>384K output</span><span>Tool calls</span><span>Permanent low pricing</span></div>
     </div>
 
-    <!-- Claude Haiku 4.5 - Plus -->
-    <div class="pump-card grade-plus">
+    <!-- Claude Haiku -->
+    <div class="pump-card an grade-plus">
       <div class="fuel-badge">⛽ Plus 89</div>
-      <div class="brand">
-        <div class="brand-logo">🧡</div>
-        <div>
-          <div class="brand-name">Anthropic</div>
-          <div class="brand-grade">Claude Haiku 4.5</div>
-        </div>
-      </div>
+      <div class="brand"><div class="brand-logo">🧡</div><div><div class="brand-name">Anthropic</div><div class="brand-grade">Claude Haiku 4.5</div></div></div>
       <div class="price-display">
         <div class="price-row"><span class="price-label">Input</span><span class="price-value">$1.00/M</span></div>
         <div class="price-row"><span class="price-label">Output</span><span class="price-value">$5.00/M</span></div>
         <div class="price-row"><span class="price-label">Cached</span><span class="price-value">$0.10/M</span></div>
       </div>
-      <div class="features">
-        <span>Fastest Claude</span><span>Agent-friendly</span><span>Batch -50%</span><span>200K context</span>
-      </div>
+      <div class="features"><span>200K context</span><span>Fastest Claude</span><span>Batch -50%</span><span>Agent-friendly</span></div>
     </div>
 
-    <!-- Gemini 3 Pro - Plus -->
-    <div class="pump-card grade-plus">
+    <!-- Gemini 3 Pro -->
+    <div class="pump-card go grade-plus">
       <div class="fuel-badge">⛽ Plus 89</div>
-      <div class="brand">
-        <div class="brand-logo">🔺</div>
-        <div>
-          <div class="brand-name">Google Gemini</div>
-          <div class="brand-grade">3 Pro</div>
-        </div>
-      </div>
+      <div class="brand"><div class="brand-logo">🔺</div><div><div class="brand-name">Google Gemini</div><div class="brand-grade">3 Pro</div></div></div>
       <div class="price-display">
         <div class="price-row"><span class="price-label">Input</span><span class="price-value">$1.50/M</span></div>
         <div class="price-row"><span class="price-label">Output</span><span class="price-value">$9.00/M</span></div>
         <div class="price-row"><span class="price-label">Cached</span><span class="price-value">$0.15/M</span></div>
       </div>
-      <div class="features">
-        <span>Latest flagship</span><span>1M context</span><span>Free tier avail</span><span>Multimodal</span>
-      </div>
+      <div class="features"><span>1M context</span><span>Latest flagship</span><span>Free tier</span><span>Multimodal</span></div>
     </div>
 
-    <!-- Claude Sonnet 4.6 - Premium -->
-    <div class="pump-card grade-premium">
+    <!-- Sonnet -->
+    <div class="pump-card an grade-premium">
       <div class="fuel-badge">⛽ Premium 93</div>
-      <div class="brand">
-        <div class="brand-logo">🧡</div>
-        <div>
-          <div class="brand-name">Anthropic</div>
-          <div class="brand-grade">Claude Sonnet 4.6</div>
-        </div>
-      </div>
+      <div class="brand"><div class="brand-logo">🧡</div><div><div class="brand-name">Anthropic</div><div class="brand-grade">Claude Sonnet 4.6</div></div></div>
       <div class="price-display">
         <div class="price-row"><span class="price-label">Input</span><span class="price-value">$3.00/M</span></div>
         <div class="price-row"><span class="price-label">Output</span><span class="price-value">$15.00/M</span></div>
         <div class="price-row"><span class="price-label">Cached</span><span class="price-value">$0.30/M</span></div>
       </div>
-      <div class="features">
-        <span>Best balance</span><span>Coding beast</span><span>200K context</span><span>Batch -50%</span>
-      </div>
+      <div class="features"><span>200K context</span><span>Best balance</span><span>Coding beast</span><span>Batch -50%</span></div>
     </div>
 
-    <!-- GPT-5.4 - Premium -->
-    <div class="pump-card grade-premium">
+    <!-- GPT-5.4 -->
+    <div class="pump-card oa grade-premium">
       <div class="fuel-badge">⛽ Premium 93</div>
-      <div class="brand">
-        <div class="brand-logo">⚡</div>
-        <div>
-          <div class="brand-name">OpenAI</div>
-          <div class="brand-grade">GPT-5.4</div>
-        </div>
-      </div>
+      <div class="brand"><div class="brand-logo">⚡</div><div><div class="brand-name">OpenAI</div><div class="brand-grade">GPT-5.4</div></div></div>
       <div class="price-display">
         <div class="price-row"><span class="price-label">Input</span><span class="price-value">$2.50/M</span></div>
         <div class="price-row"><span class="price-label">Output</span><span class="price-value">$15.00/M</span></div>
         <div class="price-row"><span class="price-label">Cached</span><span class="price-value">$0.25/M</span></div>
       </div>
-      <div class="features">
-        <span>270K context</span><span>Strong coding</span><span>Structured output</span><span>Batch -50%</span>
-      </div>
+      <div class="features"><span>270K context</span><span>Strong coding</span><span>Batch -50%</span><span>Structured output</span></div>
     </div>
 
-    <!-- Claude Opus 4.7 - Ultra -->
-    <div class="pump-card grade-ultra">
+    <!-- Opus -->
+    <div class="pump-card an grade-ultra">
       <div class="fuel-badge">⛽ Ultra 98</div>
-      <div class="brand">
-        <div class="brand-logo">🧡</div>
-        <div>
-          <div class="brand-name">Anthropic</div>
-          <div class="brand-grade">Claude Opus 4.7</div>
-        </div>
-      </div>
+      <div class="brand"><div class="brand-logo">🧡</div><div><div class="brand-name">Anthropic</div><div class="brand-grade">Claude Opus 4.7</div></div></div>
       <div class="price-display">
         <div class="price-row"><span class="price-label">Input</span><span class="price-value">$5.00/M</span></div>
         <div class="price-row"><span class="price-label">Output</span><span class="price-value">$25.00/M</span></div>
         <div class="price-row"><span class="price-label">Cached</span><span class="price-value">$0.50/M</span></div>
       </div>
-      <div class="features">
-        <span>Most intelligent</span><span>Agents & coding</span><span>200K context</span><span>Batch -50%</span>
-      </div>
+      <div class="features"><span>200K context</span><span>Most intelligent</span><span>Agents & coding</span><span>Batch -50%</span></div>
     </div>
 
-    <!-- GPT-5.5 - Ultra -->
-    <div class="pump-card grade-ultra">
+    <!-- GPT-5.5 -->
+    <div class="pump-card oa grade-ultra">
       <div class="fuel-badge">⛽ Ultra 98</div>
-      <div class="brand">
-        <div class="brand-logo">⚡</div>
-        <div>
-          <div class="brand-name">OpenAI</div>
-          <div class="brand-grade">GPT-5.5</div>
-        </div>
-      </div>
+      <div class="brand"><div class="brand-logo">⚡</div><div><div class="brand-name">OpenAI</div><div class="brand-grade">GPT-5.5</div></div></div>
       <div class="price-display">
         <div class="price-row"><span class="price-label">Input</span><span class="price-value">$5.00/M</span></div>
         <div class="price-row"><span class="price-label">Output</span><span class="price-value">$30.00/M</span></div>
         <div class="price-row"><span class="price-label">Cached</span><span class="price-value">$0.50/M</span></div>
       </div>
-      <div class="features">
-        <span>New class of intelligence</span><span>Best coding</span><span>270K context</span><span>Batch -50%</span>
-      </div>
+      <div class="features"><span>270K context</span><span>New class of intelligence</span><span>Best coding</span><span>Batch -50%</span></div>
     </div>
 
   </div>
-  <p style="text-align:center;margin-top:20px;color:#666;font-size:0.8rem">
-    * DeepSeek v4-pro pricing is DeepSeek's permanent standard rate — not a limited-time promotion. No expiration.<br>
-    All prices in USD per 1 million tokens. Cached = prompt caching read price. Data as of May 2026.
-  </p>
+  <p style="text-align:center;margin-top:18px;color:#666;font-size:0.8rem">DeepSeek v4-pro pricing is DeepSeek's permanent standard rate. All prices USD per 1M tokens. Cached = prompt caching read price. Data as of May 2026.</p>
 </section>
 
-<!-- COMPARISON TABLE -->
-<section class="compare-section" id="compare">
-  <h2>💰 Full Price Comparison</h2>
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th>Provider</th>
-          <th>Model</th>
-          <th>Grade</th>
-          <th>Input $/1M</th>
-          <th>Output $/1M</th>
-          <th>Context</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>🐋 DeepSeek</td><td>v4-flash</td><td><span class="grade-dot" style="background:#00cc44"></span>Regular</td><td class="price-cell price-low">$0.14</td><td class="price-cell price-low">$0.28</td><td>1M</td></tr>
-        <tr><td>🐋 DeepSeek</td><td>v4-pro</td><td><span class="grade-dot" style="background:#ffaa00"></span>Plus</td><td class="price-cell price-low">$0.44</td><td class="price-cell price-low">$0.87</td><td>1M</td></tr>
-        <tr><td>🔺 Google</td><td>Gemini 3 Flash</td><td><span class="grade-dot" style="background:#00cc44"></span>Regular</td><td class="price-cell price-mid">$0.75</td><td class="price-cell price-mid">$4.50</td><td>1M</td></tr>
-        <tr><td>⚡ OpenAI</td><td>GPT-5.4 mini</td><td><span class="grade-dot" style="background:#00cc44"></span>Regular</td><td class="price-cell price-mid">$0.75</td><td class="price-cell price-mid">$4.50</td><td>270K</td></tr>
-        <tr><td>🧡 Anthropic</td><td>Claude Haiku 4.5</td><td><span class="grade-dot" style="background:#ffaa00"></span>Plus</td><td class="price-cell price-mid">$1.00</td><td class="price-cell price-mid">$5.00</td><td>200K</td></tr>
-        <tr><td>🔺 Google</td><td>Gemini 3 Pro</td><td><span class="grade-dot" style="background:#ffaa00"></span>Plus</td><td class="price-cell price-mid">$1.50</td><td class="price-cell price-mid">$9.00</td><td>1M</td></tr>
-        <tr><td>⚡ OpenAI</td><td>GPT-5.4</td><td><span class="grade-dot" style="background:#ff3377"></span>Premium</td><td class="price-cell price-high">$2.50</td><td class="price-cell price-high">$15.00</td><td>270K</td></tr>
-        <tr><td>🧡 Anthropic</td><td>Claude Sonnet 4.6</td><td><span class="grade-dot" style="background:#ff3377"></span>Premium</td><td class="price-cell price-high">$3.00</td><td class="price-cell price-high">$15.00</td><td>200K</td></tr>
-        <tr><td>🧡 Anthropic</td><td>Claude Opus 4.7</td><td><span class="grade-dot" style="background:#aa44ff"></span>Ultra</td><td class="price-cell price-ultra">$5.00</td><td class="price-cell price-ultra">$25.00</td><td>200K</td></tr>
-        <tr><td>⚡ OpenAI</td><td>GPT-5.5</td><td><span class="grade-dot" style="background:#aa44ff"></span>Ultra</td><td class="price-cell price-ultra">$5.00</td><td class="price-cell price-ultra">$30.00</td><td>270K</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <p style="margin-top:24px;padding:16px;background:#111122;border-radius:8px;border:1px solid #2a2a3e;font-size:0.9rem;color:#aab;text-align:center">
-    <strong style="color:#ffcc00">💡 The cheapest coding model (DeepSeek v4-flash at $0.28/M output) is <span style="color:#ff3377">107x cheaper</span> than the most expensive (GPT-5.5 at $30/M output).</strong><br>
-    For a typical coding session generating 100K output tokens: DeepSeek costs ~3¢ vs GPT-5.5 at $3.00.
-  </p>
-</section>
-
-<!-- SUBSCRIPTION SERVICES -->
-<section class="compare-section" id="subscriptions">
-  <h2>📦 Flat-Rate Subscriptions</h2>
-  <p style="text-align:center;color:#888;margin-bottom:24px">Not into per-token pricing? These tools bundle AI into a monthly plan.</p>
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr><th>Service</th><th>Plan</th><th>Monthly</th><th>What You Get</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>🐙 GitHub Copilot</td><td>Individual</td><td class="price-cell price-low">$10</td><td>Unlimited code completions, chat, Claude + GPT models</td></tr>
-        <tr><td>🐙 GitHub Copilot</td><td>Business</td><td class="price-cell price-low">$19</td><td>+Org policies, IP indemnity</td></tr>
-        <tr><td>🖱️ Cursor</td><td>Pro</td><td class="price-cell price-low">$20</td><td>2K completions, unlimited chat, multiple models</td></tr>
-        <tr><td>🌊 Windsurf</td><td>Pro</td><td class="price-cell price-low">$15</td><td>Unlimited autocomplete, Cascade agent access</td></tr>
-        <tr><td>🔺 Gemini Code Assist</td><td>Individual</td><td class="price-cell price-low">FREE</td><td>Code completion, chat, 180K completions/month</td></tr>
-        <tr><td>🔺 Gemini Code Assist</td><td>Standard</td><td class="price-cell price-mid">$19.80</td><td>+Productivity metrics, custom rules</td></tr>
-      </tbody>
-    </table>
+<!-- ==================== COMPARISON TABLE ==================== -->
+<section id="compare">
+  <h2>📊 Full Price Comparison</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Provider</th><th>Model</th><th>Grade</th><th>Input $/1M</th><th>Output $/1M</th><th>Cached $/1M</th><th>Context</th></tr></thead>
+    <tbody>
+      <tr><td>🐋 DeepSeek</td><td>v4-flash</td><td><span class="grade-dot" style="background:#00cc44"></span>Regular</td><td class="price-cell p-low">$0.14</td><td class="price-cell p-low">$0.28</td><td class="price-cell p-low">$0.0028</td><td>1M</td></tr>
+      <tr><td>🐋 DeepSeek</td><td>v4-pro</td><td><span class="grade-dot" style="background:#ffaa00"></span>Plus</td><td class="price-cell p-low">$0.44</td><td class="price-cell p-low">$0.87</td><td class="price-cell p-low">$0.0036</td><td>1M</td></tr>
+      <tr><td>🔺 Google</td><td>Gemini 3 Flash</td><td><span class="grade-dot" style="background:#00cc44"></span>Regular</td><td class="price-cell p-mid">$0.75</td><td class="price-cell p-mid">$4.50</td><td class="price-cell p-mid">$0.075</td><td>1M</td></tr>
+      <tr><td>⚡ OpenAI</td><td>GPT-5.4 mini</td><td><span class="grade-dot" style="background:#00cc44"></span>Regular</td><td class="price-cell p-mid">$0.75</td><td class="price-cell p-mid">$4.50</td><td class="price-cell p-mid">$0.075</td><td>270K</td></tr>
+      <tr><td>🧡 Anthropic</td><td>Claude Haiku 4.5</td><td><span class="grade-dot" style="background:#ffaa00"></span>Plus</td><td class="price-cell p-mid">$1.00</td><td class="price-cell p-mid">$5.00</td><td class="price-cell p-mid">$0.10</td><td>200K</td></tr>
+      <tr><td>🔺 Google</td><td>Gemini 3 Pro</td><td><span class="grade-dot" style="background:#ffaa00"></span>Plus</td><td class="price-cell p-mid">$1.50</td><td class="price-cell p-mid">$9.00</td><td class="price-cell p-mid">$0.15</td><td>1M</td></tr>
+      <tr><td>⚡ OpenAI</td><td>GPT-5.4</td><td><span class="grade-dot" style="background:#ff3377"></span>Premium</td><td class="price-cell p-high">$2.50</td><td class="price-cell p-high">$15.00</td><td class="price-cell p-high">$0.25</td><td>270K</td></tr>
+      <tr><td>🧡 Anthropic</td><td>Claude Sonnet 4.6</td><td><span class="grade-dot" style="background:#ff3377"></span>Premium</td><td class="price-cell p-high">$3.00</td><td class="price-cell p-high">$15.00</td><td class="price-cell p-high">$0.30</td><td>200K</td></tr>
+      <tr><td>🧡 Anthropic</td><td>Claude Opus 4.7</td><td><span class="grade-dot" style="background:#aa44ff"></span>Ultra</td><td class="price-cell p-ultra">$5.00</td><td class="price-cell p-ultra">$25.00</td><td class="price-cell p-ultra">$0.50</td><td>200K</td></tr>
+      <tr><td>⚡ OpenAI</td><td>GPT-5.5</td><td><span class="grade-dot" style="background:#aa44ff"></span>Ultra</td><td class="price-cell p-ultra">$5.00</td><td class="price-cell p-ultra">$30.00</td><td class="price-cell p-ultra">$0.50</td><td>270K</td></tr>
+    </tbody>
+  </table></div>
+  <div class="savings-highlight" style="margin-top:20px">
+    <strong style="color:#ffcc00">💡 DeepSeek v4-flash ($0.28/M output) is <span style="color:#ff3377">107× cheaper</span> than GPT-5.5 ($30/M output).</strong><br>
+    100K output tokens: DeepSeek ≈ <strong>$0.03</strong> &nbsp;|&nbsp; GPT-5.5 ≈ <strong>$3.00</strong>
   </div>
 </section>
 
-<!-- EDUCATION -->
-<section class="edu-section" id="learn">
+<!-- ==================== COST SCENARIOS ==================== -->
+<section id="scenarios">
+  <h2>📋 Real-World Cost Scenarios</h2>
+  <p style="text-align:center;color:#888;margin-bottom:24px">What you actually pay when coding with an AI agent. Output tokens dominate — that's what drives cost.</p>
+  <div class="scenarios">
+    <div class="scenario-card">
+      <div class="task">🪝 Writing a React component</div>
+      <div class="desc">A standard form component with validation. ~8K output tokens.</div>
+      <div class="compare"><span class="cheap">DeepSeek v4-flash<br>$0.002</span><span class="vs">vs</span><span class="expensive">GPT-5.5<br>$0.24</span></div>
+    </div>
+    <div class="scenario-card">
+      <div class="task">🔄 Refactoring a module</div>
+      <div class="desc">Breaking up a 500-line file. ~50K output tokens.</div>
+      <div class="compare"><span class="cheap">DeepSeek v4-pro<br>$0.04</span><span class="vs">vs</span><span class="expensive">Claude Sonnet<br>$0.75</span></div>
+    </div>
+    <div class="scenario-card">
+      <div class="task">🤖 30-min agent coding session</div>
+      <div class="desc">Agent writes, debugs, iterates. ~200K output tokens.</div>
+      <div class="compare"><span class="cheap">DeepSeek v4-flash<br>$0.06</span><span class="vs">vs</span><span class="expensive">Claude Sonnet<br>$3.00</span></div>
+    </div>
+    <div class="scenario-card">
+      <div class="task">🏗️ Building a full feature</div>
+      <div class="desc">10 iterations with tests and fixes. ~500K output tokens.</div>
+      <div class="compare"><span class="cheap">DeepSeek v4-pro<br>$0.44</span><span class="vs">vs</span><span class="expensive">GPT-5.5<br>$15.00</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SUBSCRIPTIONS ==================== -->
+<section id="subscriptions">
+  <h2>📦 Flat-Rate & Free Options</h2>
+  <p style="text-align:center;color:#888;margin-bottom:24px">Don't want per-token pricing? These tools bundle AI into monthly plans — or are completely free.</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Service</th><th>Plan</th><th>Monthly</th><th>What You Get</th></tr></thead>
+    <tbody>
+      <tr><td>🐙 GitHub Copilot</td><td>Individual</td><td class="price-cell p-low">$10</td><td>Unlimited completions, chat, Claude + GPT models</td></tr>
+      <tr><td>🐙 GitHub Copilot</td><td>Business</td><td class="price-cell p-low">$19</td><td>+ Org policies, IP indemnity</td></tr>
+      <tr><td>🖱️ Cursor</td><td>Pro</td><td class="price-cell p-low">$20</td><td>2K completions/mo, unlimited chat, multi-model</td></tr>
+      <tr><td>🌊 Windsurf</td><td>Pro</td><td class="price-cell p-low">$15</td><td>Unlimited autocomplete, Cascade agent</td></tr>
+      <tr><td>🔺 Gemini Code Assist</td><td>Individual</td><td class="price-cell p-low">FREE</td><td>Code completion, chat, 180K completions/month</td></tr>
+      <tr><td>🔺 Gemini Code Assist</td><td>Standard</td><td class="price-cell p-mid">$19.80</td><td>+ Productivity metrics, custom rules</td></tr>
+      <tr><td>🦙 Ollama</td><td>Self-hosted</td><td class="price-cell p-low">FREE</td><td>Run local models (Llama, Mistral, DeepSeek, etc). You pay electricity only.</td></tr>
+      <tr><td>🔮 OpenCode CLI</td><td>Open Source</td><td class="price-cell p-low">FREE</td><td>Terminal AI agent. Bring any API key, use any provider. No markup.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ==================== BYOK TOOLS ==================== -->
+<section id="byok">
+  <h2>🔌 Bring Your Own Key (BYOK) Tools</h2>
+  <p style="text-align:center;color:#888;margin-bottom:24px">These tools don't lock you into one provider. Plug in any API key and pump whatever fuel you want.</p>
+  <div class="tool-grid">
+    <div class="tool-card" style="--bc:#8B5CF6;--bg:rgba(139,92,246,0.1)">
+      <div class="tool-name">🔮 OpenCode CLI</div>
+      <div class="tool-type">Terminal Agent · Open Source</div>
+      <div class="tool-desc">Full-featured terminal AI coding agent. Point it at any OpenAI-compatible endpoint.</div>
+      <div class="tool-providers">Works with: DeepSeek, OpenAI, Anthropic, Google, OpenRouter, Ollama, any</div>
+    </div>
+    <div class="tool-card" style="--bc:#6366F1;--bg:rgba(99,102,241,0.1)">
+      <div class="tool-name">🔌 Continue.dev</div>
+      <div class="tool-type">IDE Extension · Open Source</div>
+      <div class="tool-desc">AI code assistant for VS Code & JetBrains. Choose any model as your backend.</div>
+      <div class="tool-providers">Works with: DeepSeek, OpenAI, Anthropic, Google, Ollama, LM Studio, any</div>
+    </div>
+    <div class="tool-card" style="--bc:#10B981;--bg:rgba(16,185,129,0.1)">
+      <div class="tool-name">🤖 Aider</div>
+      <div class="tool-type">Terminal Pair Programmer · Open Source</div>
+      <div class="tool-desc">AI pair programming in your terminal. Git-aware. Any LLM you point it at.</div>
+      <div class="tool-providers">Works with: DeepSeek, OpenAI, Anthropic, Google, OpenRouter, any</div>
+    </div>
+    <div class="tool-card" style="--bc:#F59E0B;--bg:rgba(245,158,11,0.1)">
+      <div class="tool-name">🦊 Cline</div>
+      <div class="tool-type">VS Code Extension · Open Source</div>
+      <div class="tool-desc">Autonomous coding agent in your editor. Bring your own API keys.</div>
+      <div class="tool-providers">Works with: DeepSeek, OpenAI, Anthropic, Google, OpenRouter, any</div>
+    </div>
+    <div class="tool-card" style="--bc:#EC4899;--bg:rgba(236,72,153,0.1)">
+      <div class="tool-name">🌐 OpenRouter</div>
+      <div class="tool-type">Unified API · Freemium</div>
+      <div class="tool-desc">Single API to 200+ models. No lock-in. Compare and route dynamically.</div>
+      <div class="tool-providers">Routes to: DeepSeek, OpenAI, Anthropic, Google, Meta, Mistral, xAI, all</div>
+    </div>
+    <div class="tool-card" style="--bc:#aaa;--bg:rgba(170,170,170,0.08)">
+      <div class="tool-name">🦙 Ollama</div>
+      <div class="tool-type">Local Inference · Open Source</div>
+      <div class="tool-desc">Run models on your own machine. Zero token cost. Privacy + speed.</div>
+      <div class="tool-providers">Runs locally: Llama, Mistral, DeepSeek, Qwen, Gemma, Phi, any GGUF</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FUEL SWAP ==================== -->
+<section id="fuelswap">
+  <h2>🔄 Bring Your Own Fuel</h2>
+  <p style="text-align:center;color:#888;margin-bottom:24px">You don't need to switch CLIs to save money. Keep the tools you love — just change what's under the hood.</p>
+  <div class="fuel-swap-box">
+    <h3>🖥️ Keep the CLI. Change the Fuel.</h3>
+    <p style="color:#aaa;margin:10px 0">Most coding CLIs let you configure the API endpoint. You can keep using Claude Code or Codex CLI — just point them at a cheaper provider.</p>
+    <div class="swap-flow">
+      <div class="step">Claude Code<br><small style="color:#F97316">Anthropic $15/M</small></div>
+      <span class="arrow">→</span>
+      <div class="step">⚙️ Change<br>API endpoint</div>
+      <span class="arrow">→</span>
+      <div class="step">Same Claude Code<br><small style="color:#00cc44">DeepSeek $0.87/M</small></div>
+    </div>
+    <div class="swap-flow">
+      <div class="step">Codex CLI<br><small style="color:#10A37F">OpenAI $15/M</small></div>
+      <span class="arrow">→</span>
+      <div class="step">⚙️ Change<br>API endpoint</div>
+      <span class="arrow">→</span>
+      <div class="step">Same Codex CLI<br><small style="color:#00cc44">DeepSeek $0.87/M</small></div>
+    </div>
+    <p style="color:#888;font-size:0.85rem;margin-top:16px">Or use a BYOK-native tool (above) that's built for multi-provider from day one. Either way — <strong style="color:#ffcc00">the fuel is interchangeable.</strong></p>
+  </div>
+</section>
+
+<!-- ==================== WHY SHOP AROUND ==================== -->
+<section id="learn">
   <h2>🧠 Why Shop Around?</h2>
-
-  <div class="edu-card">
-    <h3><span class="emoji">🏪</span>AI Providers Are Gas Stations</h3>
-    <p>You wouldn't fill up your car at the most expensive station in town without checking prices. AI tokens are the same — different providers sell the same "fuel" (intelligence) at wildly different prices. The cheapest option is often <strong>90% as good</strong> for most tasks.</p>
-  </div>
-
-  <div class="edu-card">
-    <h3><span class="emoji">🔧</span>Match the Model to the Task</h3>
-    <p>Writing a quick script? Use <strong>DeepSeek v4-flash</strong> ($0.28/M). Building a complex system with nuanced reasoning? Maybe <strong>Sonnet 4.6</strong> ($15/M) is worth it. Most coding agents burn tokens on boilerplate, refactors, and debugging — tasks where the cheap model works just fine.</p>
-  </div>
-
-  <div class="edu-card">
-    <h3><span class="emoji">💸</span>The "Default" Trap</h3>
-    <p>People stick with Claude Code or Codex CLI because it's what they know. But the CLI you use is just the <strong>pump handle</strong> — you can swap the fuel behind it. Tools like <strong>OpenCode</strong>, <strong>Continue.dev</strong>, and <strong>Aider</strong> let you bring your own API key and choose any provider.</p>
-  </div>
-
-  <div class="edu-card">
-    <h3><span class="emoji">📊</span>Real Talk: Benchmarks vs Reality</h3>
-    <p>Benchmark scores don't tell the full story. A model scoring 2% lower on some eval might save you <strong>90% on tokens</strong>. In practice, the difference between a $0.87/M model and a $30/M model is often just a few extra iterations — not a fundamentally different outcome.</p>
-  </div>
-
-  <div class="edu-card">
-    <h3><span class="emoji">🔄</span>Multi-Provider Strategy</h3>
-    <p>Smart developers use multiple providers: cheap models for boilerplate and iteration, premium models for architecture decisions and tricky bugs. Tools like <strong>OpenRouter</strong> and <strong>Hermes Agent</strong> make it easy to route to different models based on the task.</p>
-  </div>
+  <div class="edu-card"><h3><span class="emoji">🏪</span>AI Providers Are Gas Stations</h3><p>You wouldn't fill up at the most expensive station without checking. AI tokens are the same — same "fuel" (intelligence) at wildly different prices. The cheapest is often <strong>90% as good</strong> for most coding tasks.</p></div>
+  <div class="edu-card"><h3><span class="emoji">🔧</span>Match the Model to the Task</h3><p>Writing boilerplate or CRUD? Use <strong>DeepSeek v4-flash</strong> ($0.28/M). Complex architecture decisions? Maybe <strong>Sonnet</strong> ($15/M) is worth it. Most agent tokens are spent on iteration — cheap models handle that fine.</p></div>
+  <div class="edu-card"><h3><span class="emoji">💸</span>Escape the "Default" Trap</h3><p>People stick with Claude Code or Codex because it's what they know. But the CLI is just the <strong>pump handle</strong> — you can change the fuel behind it. See the BYOK tools above.</p></div>
+  <div class="edu-card"><h3><span class="emoji">📊</span>Benchmarks ≠ Reality</h3><p>A model scoring 2% lower on some eval might save you <strong>95% on tokens</strong>. In practice, the difference between a $0.87/M model and a $30/M model is usually just a few extra iterations — not a different outcome.</p></div>
+  <div class="edu-card"><h3><span class="emoji">🔄</span>Multi-Provider Strategy</h3><p>Smart devs use multiple providers: cheap models for boilerplate/iteration, premium for architecture/tricky bugs. BYOK tools make it easy to route to different models per task.</p></div>
 </section>
 
 <footer>
   <p>⛽ <strong>AI Gas Station</strong> — Don't overpay for tokens. Shop around.</p>
-  <p style="margin-top:8px">
-    Data sourced from official pricing pages: 
-    <a href="https://api-docs.deepseek.com/quick_start/pricing" target="_blank">DeepSeek</a> · 
-    <a href="https://claude.com/pricing" target="_blank">Anthropic</a> · 
-    <a href="https://openai.com/api/pricing/" target="_blank">OpenAI</a> · 
-    <a href="https://ai.google.dev/pricing" target="_blank">Google</a> · 
-    <a href="https://github.com/features/copilot/plans" target="_blank">GitHub</a>
-  </p>
-  <p style="margin-top:8px">Prices as of May 2026. Always check official pages for current rates.</p>
+  <p>Data from official pricing pages: <a href="https://api-docs.deepseek.com/quick_start/pricing" target="_blank">DeepSeek</a> · <a href="https://claude.com/pricing" target="_blank">Anthropic</a> · <a href="https://openai.com/api/pricing/" target="_blank">OpenAI</a> · <a href="https://ai.google.dev/pricing" target="_blank">Google</a> · <a href="https://github.com/features/copilot/plans" target="_blank">GitHub</a></p>
+  <p>Prices as of May 2026. Always check official pages for current rates.</p>
 </footer>
 
 <script>
-// Generate stars
+// ===== STARS =====
 (function(){
-  const stars=document.getElementById('stars');
+  const s=document.getElementById('stars');
   for(let i=0;i<150;i++){
-    const s=document.createElement('div');
-    s.className='star';
-    s.style.cssText=`
-      left:${Math.random()*100}%;
-      top:${Math.random()*100}%;
-      width:${Math.random()*2+1}px;
-      height:${Math.random()*2+1}px;
-      --dur:${Math.random()*3+1}s;
-      --delay:${Math.random()*5}s;
-    `;
-    stars.appendChild(s);
+    const d=document.createElement('div');
+    d.className='star';
+    d.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${1+Math.random()*2}px;height:${1+Math.random()*2}px;--dur:${1+Math.random()*3}s;--delay:${Math.random()*5}s`;
+    s.appendChild(d);
   }
 })();
 
-// Randomize car emoji occasionally
+// ===== RANDOMIZE CAR =====
 const cars=['🚗💨','🚙💨','🏎️💨','🚐💨'];
-const car=document.getElementById('car');
-setInterval(()=>{
-  car.textContent=cars[Math.floor(Math.random()*cars.length)];
-},8000);
+setInterval(()=>{document.getElementById('car').textContent=cars[Math.floor(Math.random()*cars.length)]},10000);
+
+// ===== CALCULATOR =====
+const providers=[
+  {name:'DeepSeek v4-flash',grade:'Regular',in:0.14,out:0.28,color:'#00cc44'},
+  {name:'DeepSeek v4-pro',grade:'Plus',in:0.44,out:0.87,color:'#4F46E5'},
+  {name:'Gemini 3 Flash',grade:'Regular',in:0.75,out:4.50,color:'#4285F4'},
+  {name:'GPT-5.4 mini',grade:'Regular',in:0.75,out:4.50,color:'#10A37F'},
+  {name:'Claude Haiku 4.5',grade:'Plus',in:1.00,out:5.00,color:'#F97316'},
+  {name:'Gemini 3 Pro',grade:'Plus',in:1.50,out:9.00,color:'#4285F4'},
+  {name:'GPT-5.4',grade:'Premium',in:2.50,out:15.00,color:'#10A37F'},
+  {name:'Claude Sonnet 4.6',grade:'Premium',in:3.00,out:15.00,color:'#F97316'},
+  {name:'Claude Opus 4.7',grade:'Ultra',in:5.00,out:25.00,color:'#F97316'},
+  {name:'GPT-5.5',grade:'Ultra',in:5.00,out:30.00,color:'#10A37F'}
+];
+
+let currentTokens=5000000;
+const cheapest=providers.reduce((a,b)=>b.out<a.out?b:a);
+
+function updateCalc(){
+  const results=document.getElementById('calcResults');
+  const tok=currentTokens/1e6;
+  const cheapestCost=Math.round((cheapest.in+cheapest.out)*tok*100)/100;
+  let html='';
+  providers.forEach(p=>{
+    const cost=Math.round((p.in+p.out)*tok*100)/100;
+    const savings=cost-cheapestCost;
+    const isCheapest=p===cheapest;
+    html+=`<div class="calc-result" style="--c:${p.color}">
+      <div class="prov">${p.grade} · ${p.name.split(' ').pop()}</div>
+      <div class="cost">$${cost.toFixed(2)}</div>
+      <div class="per">/ month</div>
+      ${!isCheapest&&savings>0?`<div class="savings">💸 Save $${(savings*12).toFixed(0)}/yr vs cheapest</div>`:''}
+      ${isCheapest?`<div class="savings">🏆 Cheapest option</div>`:''}
+    </div>`;
+  });
+  results.innerHTML=html;
+
+  // Highlight
+  const mostExp=providers[providers.length-1];
+  const mostExpCost=Math.round((mostExp.in+mostExp.out)*tok*100)/100;
+  const annualSave=Math.round((mostExpCost-cheapestCost)*12);
+  document.getElementById('savingsHighlight').innerHTML=
+    `<strong>🔄 Switching from <span style="color:#ff3377">${mostExp.name}</span> to <span style="color:#00cc44">${cheapest.name}</span></strong><br>
+    saves <strong style="color:#ffcc00">$${annualSave.toLocaleString()}/year</strong> at ${(currentTokens/1e6).toFixed(1)}M tokens/month`;
+}
+
+document.querySelectorAll('.calc-preset').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.calc-preset').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    currentTokens=parseInt(btn.dataset.tokens);
+    document.getElementById('customTokens').value=currentTokens;
+    updateCalc();
+  });
+});
+document.getElementById('customTokens').addEventListener('input',function(){
+  document.querySelectorAll('.calc-preset').forEach(b=>b.classList.remove('active'));
+  currentTokens=parseInt(this.value)||5000000;
+  updateCalc();
+});
+updateCalc();
+
+// ===== FUEL PICKER =====
+const recommendations={
+  regular:{grade:'⛽ Regular 87',color:'#00cc44',model:'DeepSeek v4-flash',price:'$0.28/M output',why:'Boilerplate and CRUD are pattern-matching tasks. Budget models handle them 95% as well as premium — at 1/100th the cost.',cheapest:'Also try: Gemini 3 Flash ($4.50/M) or GPT-5.4 mini ($4.50/M)'},
+  plus:{grade:'⛽ Plus 89',color:'#ffaa00',model:'DeepSeek v4-pro',price:'$0.87/M output',why:'Bug fixes and debugging need a bit more reasoning. Plus-grade models give you that without the premium price tag.',cheapest:'Also try: Claude Haiku 4.5 ($5/M) or Gemini 3 Pro ($9/M)'},
+  premium:{grade:'⛽ Premium 93',color:'#ff3377',model:'Claude Sonnet 4.6',price:'$15/M output',why:'Full features require solid architecture thinking. Premium models excel here. But try Plus first — you might not need the upgrade.',cheapest:'Also try: GPT-5.4 ($15/M). Or test DeepSeek v4-pro first — you might be surprised.'},
+  ultra:{grade:'⛽ Ultra 98',color:'#aa44ff',model:'Claude Opus 4.7',price:'$25/M output',why:'Complex architecture benefits from the strongest reasoning. But ask yourself: can Sonnet handle 90% of this? It costs 40% less.',cheapest:'Alternative: GPT-5.5 ($30/M). Only use Ultra when the task truly demands it.'},
+  agent:{grade:'⚡ Agent Strategy',color:'#ffcc00',model:'Multi-model routing',price:'Hybrid',why:'Agent workflows burn tokens on boilerplate AND need deep reasoning. Best strategy: route simple tasks to DeepSeek v4-flash, complex ones to Sonnet. Save 80%+ vs using premium for everything.',cheapest:'Use a BYOK tool like OpenCode or Continue.dev that supports per-task model routing.'}
+};
+
+document.querySelectorAll('.picker-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.picker-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const r=recommendations[btn.dataset.grade];
+    const el=document.getElementById('pickerResult');
+    el.className='picker-result show';
+    el.style.cssText=`--c:${r.color}`;
+    el.innerHTML=`
+      <div class="grade-name">${r.grade}</div>
+      <div class="suggestion"><strong>Recommended:</strong> ${r.model} (${r.price})</div>
+      <p style="color:#aaa;margin:10px 0;font-size:0.9rem">${r.why}</p>
+      <div class="cheapest"><strong>${r.cheapest}</strong></div>`;
+  });
+});
 </script>
 
 </body>
